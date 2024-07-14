@@ -1,0 +1,26 @@
+{
+  "name": "glowing-robot",
+  "version": "1.0.0",
+  "description": "Todo list",
+  "default": "index.html",
+  "scripts": {
+    "start": "parcel index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DevArtist254/glowing-robot.git"
+  },
+  "keywords": [
+    "list"
+  ],
+  "author": "devartist",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DevArtist254/glowing-robot/issues"
+  },
+  "homepage": "https://github.com/DevArtist254/glowing-robot#readme",
+  "devDependencies": {
+    "parcel": "^2.12.0",
+    "sass": "^1.77.8"
+  }
+}
