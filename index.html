@@ -10,26 +10,26 @@
         
         <form>
             <label for="text">What's on the agenda for today</label> <br>
-            <input type="text" placeholder="Enter your the activity or project here"> <br>
-            <input type="text" placeholder="Enter your your name"> <br>
-            <input type="date" placeholder="Enter the deadline"> <br>
+            <input id="activityUser" type="text" placeholder="Enter your the activity or project here"> <br>
+            <input id="user" type="text" placeholder="Enter your your name"> <br>
+            <input id="date" type="date" placeholder="Enter the deadline"> <br>
             <button type="submit">Submit</button>
         </form>
 
         <hr>
 
-        <h2>Home remodel</h2>
+        <h2 id="activityEntry">Home remodel</h2>
         <h1>To-Do List</h1>
-        <h3>To be completed by <span>Kevin Wasonga</span></h3>
-        <h3>Deadline <span>01/31/2021</span></h3>
+        <h3>To be completed by <span id="userEntry">Kevin Wasonga</span></h3>
+        <h3>Deadline <span id="dateEntry">01/31/2021</span></h3>
 
         <hr>
 
         <form>
             <label for="text">Enter different phases</label> <br>
-            <input type="text" placeholder="Enter your the activity or project here"><br>
+            <input id="activityPhase" type="text" placeholder="Enter your the activity or project here"><br>
             <label for="text">Enter due date</label> <br>
-            <input type="date" placeholder="Enter the deadline">
+            <input id="deadlineActivityDate" type="date" placeholder="Enter the deadline">
             <button type="submit">Submit</button>
         </form>
 
@@ -37,25 +37,24 @@
 
         <table>
             <tr>
+                <th>Order</th>
                 <th>% Done</th>
                 <th>Due by</th>
                 <th>Phase</th>
                 <th>Notes</th>
             </tr>
             <tr>
-                <td>100 %</td>
-                <td>13 Sat</td>
-                <td>Shopping</td>
+                <td id="order">1.</td>
+                <td id="percentagePhaseDone">100 %</td>
+                <td id="phasePhaseDate">13 Sat</td>
+                <td id="phasePhaseActivity">Shopping</td>
                 <td>
-                    <input type="text" name="notes" id="33" placeholder="please break it down">
+                    <input type="text" name="notes" id="33" placeholder="please break it down" id="notesActivityPhase">
                     <ul>
-                        <li>Get the meat <input type="checkbox" name="item1" id="1"></li>
-                        <li>Get the vegetables <input type="checkbox" name="item1" id="1"></li>
-                        <li>Get the flour <input type="checkbox" name="item1" id="1"></li>
-                        <li>Look for species <input type="checkbox" name="item1" id="1"></li>
+                        <li id="notes">Get the meat <input type="checkbox" name="item1" id="notesChecker"></li>
                     </ul>
-                    <button type="submit">Done</button>
-                    <button type="submit">Unable</button>
+                    <button id="submitDone">Done</button>
+                    <button id="submitUnable">Unable</button>
                 </td>
             </tr>
         </table>
