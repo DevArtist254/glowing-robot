@@ -586,15 +586,17 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 },{}],"aenu9":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _model = require("./model");
+var _introView = require("./View/introView");
+var _introViewDefault = parcelHelpers.interopDefault(_introView);
 var _userView = require("./View/userView");
 var _userViewDefault = parcelHelpers.interopDefault(_userView);
 const userActivity = function(userObj = null) {
     _model.setUserModel(userObj);
-    console.log(_model.state);
+    (0, _introViewDefault.default).updateUI(_model.state.user);
 };
 (0, _userViewDefault.default).getUserInfo(userActivity);
 
-},{"./View/userView":"i1cKk","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./model":"Y4A21"}],"i1cKk":[function(require,module,exports) {
+},{"./View/userView":"i1cKk","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./model":"Y4A21","./View/introView":"2IOc6"}],"i1cKk":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 class UserView {
@@ -661,6 +663,21 @@ const setUserModel = function(newUser) {
         activity
     };
 };
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2IOc6":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+class IntroView {
+    _activityEntry = document.querySelector("#activityEntry");
+    _dateEntry = document.querySelector("#dateEntry");
+    _userEntry = document.querySelector("#userEntry");
+    updateUI(user = null) {
+        if (user.user !== this._userEntry.textContent) this._userEntry.textContent = user.user;
+        if (user.date !== this._dateEntry.textContent) this._dateEntry.textContent = user.date;
+        if (user.activity !== this._activityEntry.textContent) this._activityEntry.textContent = user.activity;
+    }
+}
+exports.default = new IntroView();
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["hycaY","aenu9"], "aenu9", "parcelRequire4f33")
 

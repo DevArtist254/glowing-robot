@@ -1,10 +1,11 @@
 import * as model from "./model";
+import introView from "./View/introView";
 import userView from "./View/userView";
 
 const userActivity = function (userObj = null) {
     model.setUserModel(userObj)
 
-    console.log(model.state);
+    introView.updateUI(model.state.user);
 };
 
 
