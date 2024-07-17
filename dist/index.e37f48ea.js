@@ -588,15 +588,22 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _model = require("./model");
 var _introView = require("./View/introView");
 var _introViewDefault = parcelHelpers.interopDefault(_introView);
+var _phaseView = require("./View/phaseView");
+var _phaseViewDefault = parcelHelpers.interopDefault(_phaseView);
 var _userView = require("./View/userView");
 var _userViewDefault = parcelHelpers.interopDefault(_userView);
 const userActivity = function(userObj = null) {
     _model.setUserModel(userObj);
     (0, _introViewDefault.default).updateUI(_model.state.user);
 };
+const phaseEntry = function(phase = null) {
+    _model.setActivityPhase(phase);
+    console.log(_model.state.phases);
+};
 (0, _userViewDefault.default).getUserInfo(userActivity);
+(0, _phaseViewDefault.default).submitNewPhase(phaseEntry);
 
-},{"./View/userView":"i1cKk","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./model":"Y4A21","./View/introView":"2IOc6"}],"i1cKk":[function(require,module,exports) {
+},{"./View/userView":"i1cKk","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./model":"Y4A21","./View/introView":"2IOc6","./View/phaseView":"kzmgg"}],"i1cKk":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 class UserView {
@@ -652,8 +659,10 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "state", ()=>state);
 parcelHelpers.export(exports, "setUserModel", ()=>setUserModel);
+parcelHelpers.export(exports, "setActivityPhase", ()=>setActivityPhase);
 const state = {
-    user: {}
+    user: {},
+    phases: []
 };
 const setUserModel = function(newUser) {
     const { user, date, activity } = newUser;
@@ -662,6 +671,16 @@ const setUserModel = function(newUser) {
         date,
         activity
     };
+};
+const setActivityPhase = function(newPhase) {
+    const { date, activity } = newPhase;
+    const phase = {
+        date,
+        activity,
+        percentageDone: 0,
+        order: 1
+    };
+    state.phases.push(phase);
 };
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2IOc6":[function(require,module,exports) {
@@ -678,6 +697,25 @@ class IntroView {
     }
 }
 exports.default = new IntroView();
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kzmgg":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+class PhaseView {
+    _phase = document.querySelector("#phase");
+    _phaseActivity = document.querySelector("#activityPhase");
+    _deadline = document.querySelector("#deadlineActivityDate");
+    submitNewPhase(handler) {
+        this._phase.addEventListener("submit", (e)=>{
+            e.preventDefault();
+            const phase = {};
+            phase.date = this._deadline.value;
+            phase.activity = this._phaseActivity.value;
+            handler(phase);
+        });
+    }
+}
+exports.default = new PhaseView();
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["hycaY","aenu9"], "aenu9", "parcelRequire4f33")
 

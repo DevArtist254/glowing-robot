@@ -26,7 +26,7 @@
 
         <hr>
 
-        <form>
+        <form id="phase">
             <label for="text">Enter different phases</label> <br>
             <input id="activityPhase" type="text" placeholder="Enter your the activity or project here"><br>
             <label for="text">Enter due date</label> <br>
@@ -36,26 +36,31 @@
 
         <hr>
 
-        <table>
+        <table id="p">
             <tr>
                 <th>Order</th>
-                <th>% Done</th>
+                <th>Done %</th>
                 <th>Due by</th>
                 <th>Phase</th>
                 <th>Notes</th>
             </tr>
-            <tr>
+            <tr id="phaseActivity">
                 <td id="order">1.</td>
                 <td id="percentagePhaseDone">100 %</td>
-                <td id="phasePhaseDate">13 Sat</td>
-                <td id="phasePhaseActivity">Shopping</td>
-                <td>
-                    <input type="text" name="notes" id="33" placeholder="please break it down">
-                    <ul>
-                        <li id="notes">Get the meat <input type="checkbox" name="item1" id="notesChecker"></li>
-                    </ul>
-                    <button id="submitDone">Done</button>
-                    <button id="submitUnable">Unable</button>
+                <td id="phaseDate">13 Sat</td>
+                <td id="activity">Shopping</td>
+                <td id="notes">
+                    <div class="btns">
+                        <button id="submitDone">Done</button>
+                        <button id="submitUnable">Unable</button>
+                        <button id="addNote">Add a note</button>
+                    </div>
+                    <div class="note" style="display: none">
+                        <input type="text" name="notes" id="33" placeholder="please break it down">
+                        <ul>
+                            <li id="notes">Get the meat <input type="checkbox" name="item1" id="notesChecker"></li>
+                        </ul>
+                    </div>
                 </td>
             </tr>
         </table>
