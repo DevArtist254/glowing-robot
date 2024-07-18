@@ -588,8 +588,8 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _model = require("./model");
 var _introView = require("./View/introView");
 var _introViewDefault = parcelHelpers.interopDefault(_introView);
-var _phaseView = require("./View/phaseView");
-var _phaseViewDefault = parcelHelpers.interopDefault(_phaseView);
+var _activityView = require("./View/activityView");
+var _activityViewDefault = parcelHelpers.interopDefault(_activityView);
 var _userView = require("./View/userView");
 var _userViewDefault = parcelHelpers.interopDefault(_userView);
 const userActivity = function(userObj = null) {
@@ -599,11 +599,12 @@ const userActivity = function(userObj = null) {
 const phaseEntry = function(phase = null) {
     _model.setActivityPhase(phase);
     console.log(_model.state.phases);
+    (0, _activityViewDefault.default).generatePhaseMarkup(_model.state.phases);
 };
 (0, _userViewDefault.default).getUserInfo(userActivity);
-(0, _phaseViewDefault.default).submitNewPhase(phaseEntry);
+(0, _activityViewDefault.default).submitNewPhase(phaseEntry);
 
-},{"./View/userView":"i1cKk","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./model":"Y4A21","./View/introView":"2IOc6","./View/phaseView":"kzmgg"}],"i1cKk":[function(require,module,exports) {
+},{"./View/userView":"i1cKk","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./model":"Y4A21","./View/introView":"2IOc6","./View/activityView":"68aQa"}],"i1cKk":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 class UserView {
@@ -698,10 +699,13 @@ class IntroView {
 }
 exports.default = new IntroView();
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kzmgg":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"68aQa":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-class PhaseView {
+var _phaseView = require("./phaseView");
+var _phaseViewDefault = parcelHelpers.interopDefault(_phaseView);
+class ActivityView {
+    _parent = document.querySelector("#p");
     _phase = document.querySelector("#phase");
     _phaseActivity = document.querySelector("#activityPhase");
     _deadline = document.querySelector("#deadlineActivityDate");
@@ -713,6 +717,41 @@ class PhaseView {
             phase.activity = this._phaseActivity.value;
             handler(phase);
         });
+    }
+    generatePhaseMarkup(data) {
+        //this._data = data;
+        const markup = data.map((el)=>(0, _phaseViewDefault.default).render(el)).join("");
+        this._parent.insertAdjacentHTML("beforeend", markup);
+    }
+}
+exports.default = new ActivityView();
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./phaseView":"kzmgg"}],"kzmgg":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+class PhaseView {
+    render(data) {
+        return `
+            <tr id="phaseActivity">
+                <td id="order">1.</td>
+                <td id="percentagePhaseDone">${data.percentageDone} %</td>
+                <td id="phaseDate">${data.date}</td>
+                <td id="activity">${data.activity}</td>
+                <td id="notes">
+                    <div class="btns">
+                        <button id="submitDone">Done</button>
+                        <button id="submitUnable">Unable</button>
+                        <button id="addNote">Add a note</button>
+                    </div>
+                    <div class="note" style="display: none;">
+                        <input type="text" name="notes" id="33" placeholder="please break it down" id="notesActivityPhase">
+                        <ul>
+                            <li id="notes">Get the meat <input type="checkbox" name="item1" id="notesChecker"></li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        `;
     }
 }
 exports.default = new PhaseView();

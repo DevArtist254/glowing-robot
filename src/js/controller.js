@@ -1,6 +1,6 @@
 import * as model from "./model";
 import introView from "./View/introView";
-import phaseView from "./View/phaseView";
+import activityView from "./View/activityView";
 import userView from "./View/userView";
 
 const userActivity = function (userObj = null) {
@@ -13,8 +13,9 @@ const phaseEntry = function (phase = null) {
     model.setActivityPhase(phase);
 
     console.log(model.state.phases);
+    activityView.generatePhaseMarkup(model.state.phases);
 } 
 
 
 userView.getUserInfo(userActivity);
-phaseView.submitNewPhase(phaseEntry);
+activityView.submitNewPhase(phaseEntry);
