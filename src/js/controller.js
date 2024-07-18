@@ -4,18 +4,17 @@ import activityView from "./View/activityView";
 import userView from "./View/userView";
 
 const userActivity = function (userObj = null) {
-    model.setUserModel(userObj)
+  model.setUserModel(userObj);
 
-    introView.updateUI(model.state.user);
+  introView.updateUI(model.state.user);
 };
 
-const phaseEntry = function (phase = null) {
-    model.setActivityPhase(phase);
+const phaseEntry = function (phase) {
 
-    console.log(model.state.phases);
-    activityView.generatePhaseMarkup(model.state.phases);
-} 
+  model.setActivityPhase(phase);
 
+  activityView.generatePhaseMarkup(phase);
+};
 
 userView.getUserInfo(userActivity);
 activityView.submitNewPhase(phaseEntry);

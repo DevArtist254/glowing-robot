@@ -5,24 +5,26 @@ class ActivityView {
   _phase = document.querySelector("#phase");
   _phaseActivity = document.querySelector("#activityPhase");
   _deadline = document.querySelector("#deadlineActivityDate");
+  _count = 1;
 
   submitNewPhase(handler) {
     this._phase.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const phase = {};
+      e.preventDefault();
+      const phase = {};
 
-        phase.date = this._deadline.value ;
-        phase.activity = this._phaseActivity.value;
+      phase.date = this._deadline.value;
+      phase.activity = this._phaseActivity.value;
+      phase.order = this._count++;
+      phase.percentageDone = 0;
 
-        handler(phase);
-    })
+      handler(phase);
+    });
   }
 
-  generatePhaseMarkup(data){
-    //this._data = data;
-    const markup = data.map(el => phaseView.render(el)).join('');
+  generatePhaseMarkup(data) {
+    const markup = phaseView.render(data);
 
-    this._parent.insertAdjacentHTML('beforeend', markup);
+    this._parent.insertAdjacentHTML("beforeend", markup);
   }
 }
 

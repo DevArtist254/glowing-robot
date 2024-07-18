@@ -3,7 +3,7 @@ class PhaseView {
     render(data){
         return `
             <tr id="phaseActivity">
-                <td id="order">1.</td>
+                <td id="order">${data.order}</td>
                 <td id="percentagePhaseDone">${data.percentageDone} %</td>
                 <td id="phaseDate">${data.date}</td>
                 <td id="activity">${data.activity}</td>

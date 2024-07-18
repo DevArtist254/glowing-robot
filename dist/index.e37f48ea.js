@@ -596,10 +596,9 @@ const userActivity = function(userObj = null) {
     _model.setUserModel(userObj);
     (0, _introViewDefault.default).updateUI(_model.state.user);
 };
-const phaseEntry = function(phase = null) {
+const phaseEntry = function(phase) {
     _model.setActivityPhase(phase);
-    console.log(_model.state.phases);
-    (0, _activityViewDefault.default).generatePhaseMarkup(_model.state.phases);
+    (0, _activityViewDefault.default).generatePhaseMarkup(phase);
 };
 (0, _userViewDefault.default).getUserInfo(userActivity);
 (0, _activityViewDefault.default).submitNewPhase(phaseEntry);
@@ -673,14 +672,7 @@ const setUserModel = function(newUser) {
         activity
     };
 };
-const setActivityPhase = function(newPhase) {
-    const { date, activity } = newPhase;
-    const phase = {
-        date,
-        activity,
-        percentageDone: 0,
-        order: 1
-    };
+const setActivityPhase = function(phase) {
     state.phases.push(phase);
 };
 
@@ -709,18 +701,20 @@ class ActivityView {
     _phase = document.querySelector("#phase");
     _phaseActivity = document.querySelector("#activityPhase");
     _deadline = document.querySelector("#deadlineActivityDate");
+    _count = 1;
     submitNewPhase(handler) {
         this._phase.addEventListener("submit", (e)=>{
             e.preventDefault();
             const phase = {};
             phase.date = this._deadline.value;
             phase.activity = this._phaseActivity.value;
+            phase.order = this._count++;
+            phase.percentageDone = 0;
             handler(phase);
         });
     }
     generatePhaseMarkup(data) {
-        //this._data = data;
-        const markup = data.map((el)=>(0, _phaseViewDefault.default).render(el)).join("");
+        const markup = (0, _phaseViewDefault.default).render(data);
         this._parent.insertAdjacentHTML("beforeend", markup);
     }
 }
@@ -733,7 +727,7 @@ class PhaseView {
     render(data) {
         return `
             <tr id="phaseActivity">
-                <td id="order">1.</td>
+                <td id="order">${data.order}</td>
                 <td id="percentagePhaseDone">${data.percentageDone} %</td>
                 <td id="phaseDate">${data.date}</td>
                 <td id="activity">${data.activity}</td>

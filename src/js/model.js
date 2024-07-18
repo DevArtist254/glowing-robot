@@ -13,15 +13,6 @@ export const setUserModel = function(newUser){
     }
 }
 
-export const setActivityPhase = function(newPhase){
-    const {date, activity} = newPhase;
-
-    const phase = {
-        date,
-        activity,
-        percentageDone : 0,
-        order : 1
-    } 
-
+export const setActivityPhase = function(phase){
     state.phases.push(phase);
 }
