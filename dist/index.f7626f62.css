@@ -1,0 +1,72 @@
+*, :after, :before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  display: flex;
+  position: relative;
+}
+
+main {
+  display: none;
+}
+
+.popup {
+  z-index: 100;
+  width: 80%;
+  height: 40vh;
+  padding: 80px 90px;
+  position: absolute;
+  box-shadow: .6px .6px 8px #000;
+}
+
+.popup__header {
+  font-family: Orbitron, sans-serif;
+  font-size: 36px;
+  font-style: bold;
+  width: max-content;
+  margin-bottom: 50px;
+}
+
+.popup__userInfo {
+  width: 100%;
+}
+
+.popup__form {
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 25px;
+  display: flex;
+}
+
+.popup__input {
+  width: 360px;
+}
+
+.popup__label {
+  font-family: Orbitron, sans-serif;
+  font-size: 18px;
+  font-style: normal;
+}
+
+.popup__input, .popup__input:focus {
+  border: none;
+  border-bottom: 2px solid #000;
+  outline: none;
+}
+
+.popup__submit, .popup__submit:focus {
+  background: none;
+  border: 2px solid #000;
+  width: 145px;
+  height: 40px;
+  font-family: Orbitron, sans-serif;
+  font-size: 18px;
+  font-style: normal;
+}
+/*# sourceMappingURL=index.f7626f62.css.map */
