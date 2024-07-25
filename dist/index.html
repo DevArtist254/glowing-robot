@@ -6,50 +6,52 @@
     <title>Todo list</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/index.f7626f62.css">
     <script defer="" src="/index.e37f48ea.js"></script>
   </head>
   <body>
-    <div class="popup">
+    <!-- <div class="popup">
       <h1 class="popup__header">What's on the agenda for today</h1>
       <form id="userInfo" class="popup__userInfo">
         <div class="popup__form">
-          <label class="popup__label" for="text">Enter your the activity or project here</label>
-          <input class="popup__input" id="activityUser" type="text">
+          <label class="popup__label" for="text"
+            >Enter your the activity or project here</label
+          >
+          <input class="popup__input" id="activityUser" type="text" />
         </div>
         <div class="popup__form">
           <label class="popup__label" for="text">Enter your name</label>
-          <input class="popup__input" id="user" type="text">
+          <input class="popup__input" id="user" type="text" />
         </div>
         <div class="popup__form">
           <label class="popup__label" for="date">Enter the deadline</label>
-          <input class="popup__input" id="date" type="date">
+          <input class="popup__input" id="date" type="date" />
         </div>
         <button class="popup__submit" type="submit">Start here</button>
       </form>
-    </div>
+    </div> -->
     <main>
-      <hr>
-
-      <h2 id="activityEntry"></h2>
-      <h1>To-Do List</h1>
-      <h3>To be completed by <span id="userEntry"></span></h3>
-      <h3>Deadline <span id="dateEntry"></span></h3>
-
-      <hr>
-
-      <form id="phase">
-        <label for="text">Enter different phases</label> <br>
-        <input id="activityPhase" type="text" placeholder="Enter your the activity or project here"><br>
-        <label for="text">Enter due date</label> <br>
-        <input id="deadlineActivityDate" type="date" placeholder="Enter the deadline">
-        <button type="submit">Submit</button>
-      </form>
-
-      <hr>
-
-      <table id="p">
+      <div class="activity">
+        <div class="activityEntry">
+          <h2 class="activityEntry__topic">To-Do List</h2>
+          <h1 id="activityEntry" class="activityEntry__header">Home remodel</h1>
+          <h3 class="activityEntry__user">
+            To be completed by
+          </h3>
+          <h3 class="activityEntry__user--E" id="userEntry">Kevin Wasonga</h3>
+          <h3 class="activityEntry__date">
+            Deadline 
+          </h3>
+          <h3 class="activityEntry__date--D" id="dateEntry">12 sato</h3>
+        </div>
+        <form id="phase" class="phaseEntry">
+          <input id="activityPhase" type="text" placeholder="Enter your the activity or project here">
+          <input id="deadlineActivityDate" type="date" placeholder="Enter the deadline">
+          <button class="phase-btn" type="submit">Submit</button>
+        </form>
+      </div>
+      <table id="p" class="phases">
         <tr>
           <th>Order</th>
           <th>Done %</th>

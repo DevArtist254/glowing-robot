@@ -15,8 +15,8 @@ class UserView {
         userObj.user = this._user.value;
         userObj.date = this._date.value;
 
-        this._popup.style.display = "none";
-        this._main.style.display = "block";
+        // this._popup.style.display = "none";
+        // this._main.style.display = "block";
 
         handler(userObj);
       })

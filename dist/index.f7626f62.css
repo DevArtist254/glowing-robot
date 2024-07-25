@@ -13,7 +13,63 @@ body {
 }
 
 main {
-  display: none;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  margin: auto 0;
+  display: flex;
+}
+
+.activity {
+  width: 40%;
+  height: 60vh;
+}
+
+.activityEntry__topic, .activityEntry__user, .activityEntry__date {
+  font-family: Mochiy Pop One, sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.activityEntry__header, .activityEntry__user--E, .activityEntry__date--D {
+  margin-bottom: 50px;
+  font-family: Orbitron, serif;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+#activityPhase, #activityPhase:focus, #deadlineActivityDate, #deadlineActivityDate:focus {
+  border: none;
+  border-bottom: 2px solid #000;
+  outline: none;
+  width: 100%;
+  height: max-content;
+}
+
+#activityPhase, #deadlineActivityDate {
+  height: 30px;
+  margin-bottom: 50px;
+}
+
+#activityPhase::placeholder, #deadlineActivityDate::placeholder {
+  text-align: end;
+  font-family: Mochiy Pop One, sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.phase-btn, .phase-btn:focus {
+  background: none;
+  border: 2px solid #000;
+  width: 145px;
+  height: 40px;
+  font-family: Orbitron, sans-serif;
+  font-size: 18px;
+  font-style: normal;
 }
 
 .popup {
