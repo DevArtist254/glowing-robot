@@ -21,55 +21,127 @@ main {
   display: flex;
 }
 
-.activity {
-  width: 40%;
-  height: 60vh;
+.phases {
+  width: 950px;
+  height: 1000px;
+  overflow-y: scroll;
 }
 
-.activityEntry__topic, .activityEntry__user, .activityEntry__date {
+.phases__table {
+  border-collapse: collapse;
+  width: 100%;
   font-family: Mochiy Pop One, sans-serif;
-  font-size: 24px;
+  font-size: 18px;
   font-style: normal;
   font-weight: 400;
 }
 
-.activityEntry__header, .activityEntry__user--E, .activityEntry__date--D {
-  margin-bottom: 50px;
-  font-family: Orbitron, serif;
-  font-size: 36px;
-  font-style: normal;
-  font-weight: 400;
+.phases__table--ho {
+  width: 5%;
 }
 
-#activityPhase, #activityPhase:focus, #deadlineActivityDate, #deadlineActivityDate:focus {
+.phases__table--hp, .phases__table--hd {
+  width: 10%;
+}
+
+.phases__table--hn {
+  width: 50%;
+}
+
+.phases__table--ho, .phases__table--hp, .phases__table--hd, .phases__table--hn, .phases__table--ha, .phases__table--td {
+  text-align: left;
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.phases__table--trHead {
+  color: #fff;
+  background-color: #000;
+}
+
+.phases__table--tr {
+  height: 45px;
+}
+
+.phases__table--tr:nth-child(odd) {
+  color: #fff;
+  background-color: #717171;
+}
+
+#percentagePhaseDone {
+  position: relative;
+}
+
+#percentagePhaseDone__p {
+  z-index: 10;
+  color: #fff;
+  position: absolute;
+  top: 8px;
+  left: 4px;
+}
+
+#percentagePhaseDone__c {
+  z-index: 5;
+  background-color: #000;
+  width: 85px;
+  height: 35px;
+  position: absolute;
+  top: 3px;
+  left: 4px;
+}
+
+#notes {
+  position: relative;
+}
+
+#notes:hover .note__content {
+  display: block;
+}
+
+.note {
+  background-color: #e3e3e3;
+  width: 100%;
+  min-height: 300px;
+  padding: 10px;
+  position: absolute;
+  top: 45px;
+  left: 0;
+}
+
+.note__content {
+  display: none;
+}
+
+.note__input, .note__input:focus {
   border: none;
   border-bottom: 2px solid #000;
   outline: none;
-  width: 100%;
-  height: max-content;
-}
-
-#activityPhase, #deadlineActivityDate {
+  width: 90%;
   height: 30px;
-  margin-bottom: 50px;
+  margin-bottom: 10px;
 }
 
-#activityPhase::placeholder, #deadlineActivityDate::placeholder {
+.note__input::placeholder {
   text-align: end;
   font-family: Mochiy Pop One, sans-serif;
-  font-size: 24px;
+  font-size: 18px;
   font-style: normal;
   font-weight: 400;
 }
 
-.phase-btn, .phase-btn:focus {
-  background: none;
-  border: 2px solid #000;
-  width: 145px;
-  height: 40px;
-  font-family: Orbitron, sans-serif;
-  font-size: 18px;
-  font-style: normal;
+.note__list {
+  color: #000;
+  margin-left: 20px;
+}
+
+.note__btns {
+  flex-direction: row;
+  display: flex;
+}
+
+.note__btns p {
+  margin-left: 10px;
+  text-decoration: underline;
 }
 
 .popup {
@@ -117,6 +189,63 @@ main {
 }
 
 .popup__submit, .popup__submit:focus {
+  background: none;
+  border: 2px solid #000;
+  width: 145px;
+  height: 40px;
+  font-family: Orbitron, sans-serif;
+  font-size: 18px;
+  font-style: normal;
+}
+
+.activity {
+  width: 40%;
+  height: 60vh;
+}
+
+.activityEntry__topic, .activityEntry__user, .activityEntry__date {
+  font-family: Mochiy Pop One, sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.activityEntry__header, .activityEntry__user--E, .activityEntry__date--D {
+  margin-bottom: 50px;
+  font-family: Orbitron, serif;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+#activityPhase, #activityPhase:focus, #deadlineActivityDate, #deadlineActivityDate:focus {
+  border: none;
+  border-bottom: 2px solid #000;
+  outline: none;
+  width: 100%;
+  height: 30px;
+}
+
+#activityPhase, #deadlineActivityDate {
+  margin-bottom: 50px;
+}
+
+#activityPhase::placeholder, #deadlineActivityDate::placeholder {
+  text-align: end;
+  font-family: Mochiy Pop One, sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+#phase {
+  flex-direction: column;
+  align-items: flex-end;
+  display: flex;
+}
+
+.phase-btn, .phase-btn:focus {
+  cursor: pointer;
   background: none;
   border: 2px solid #000;
   width: 145px;

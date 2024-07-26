@@ -24,67 +24,136 @@ main {
   align-items: center;
 }
 
-.activity {
-  width: 40%;
-  height: 60vh;
-}
+.phases {
+  width: 950px;
+  height: 1000px;
+  overflow-y: scroll;
 
-.activityEntry {
-  &__topic,
-  &__user,
-  &__date {
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+
     font-family: "Mochiy Pop One", sans-serif;
     font-weight: 400;
     font-style: normal;
-    font-size: 24px;
-  }
+    font-size: 18px;
 
-  &__header,
-  &__user--E,
-  &__date--D {
-    font-family: "Orbitron", serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 36px;
-    margin-bottom: 50px;
+    &--ho {
+      width: 5%;
+    }
+    &--hp {
+      width: 10%;
+    }
+    &--hd {
+      width: 10%;
+    }
+    &--hn {
+      width: 50%;
+    }
+
+    &--ho,
+    &--hp,
+    &--hd,
+    &--hn,
+    &--ha,
+    &--td {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    &--trHead {
+      background-color: #000;
+      color: #fff;
+    }
+
+    &--tr {
+      height: 45px;
+
+      &:nth-child(odd) {
+        background-color: #717171;
+        color: #fff;
+      }
+    }
   }
 }
 
-#activityPhase,
-#activityPhase:focus,
-#deadlineActivityDate,
-#deadlineActivityDate:focus {
+#percentagePhaseDone {
+  position: relative;
+
+  &__p {
+    position: absolute;
+    z-index: 10;
+    top: 8px;
+    left: 4px;
+
+    color: #fff;
+  }
+
+  &__c {
+    position: absolute;
+    top: 3px;
+    left: 4px;
+    z-index: 5;
+    width: 85px;
+    height: 35px;
+
+    background-color: #000;
+  }
+}
+
+#notes {
+  position: relative;
+
+  &:hover .note__content {
+    display: block;
+  }
+}
+
+.note {
   width: 100%;
-  height: max-content;
-  border: none;
-  outline: none;
-  border-bottom: 2px solid #000;
-}
+  position: absolute;
+  top: 45px;
+  left: 0;
+  min-height: 300px;
+  background-color: #e3e3e3;
+  padding: 10px;
 
-#activityPhase,
-#deadlineActivityDate {
-  height: 30px;
-  margin-bottom: 50px;
+  &__content {
+    display: none;
+  }
 
-  &::placeholder {
+  &__input,
+  &__input:focus {
+    margin-bottom: 10px;
+
+    width: 90%;
+    height: 30px;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid #000;
+  }
+
+  &__input::placeholder {
     font-family: "Mochiy Pop One", sans-serif;
     font-weight: 400;
     font-style: normal;
-    font-size: 24px;
+    font-size: 18px;
     text-align: end;
   }
-}
 
-.phase-btn,
-.phase-btn:focus {
-  width: 145px;
-  height: 40px;
+  &__list {
+    margin-left: 20px;
+    color: #000;
+  }
 
-  background: none;
-  border: none;
+  &__btns {
+    display: flex;
+    flex-direction: row;
 
-  border: 2px solid #000;
-  font-family: "Orbitron", sans-serif;
-  font-size: 18px;
-  font-style: normal;
+    & p {
+      margin-left: 10px;
+      text-decoration: underline;
+    }
+  }
 }

@@ -39,13 +39,9 @@
         <div class="activityEntry">
           <h2 class="activityEntry__topic">To-Do List</h2>
           <h1 id="activityEntry" class="activityEntry__header">Home remodel</h1>
-          <h3 class="activityEntry__user">
-            To be completed by
-          </h3>
+          <h3 class="activityEntry__user">To be completed by</h3>
           <h3 class="activityEntry__user--E" id="userEntry">Kevin Wasonga</h3>
-          <h3 class="activityEntry__date">
-            Deadline 
-          </h3>
+          <h3 class="activityEntry__date">Deadline</h3>
           <h3 class="activityEntry__date--D" id="dateEntry">12 sato</h3>
         </div>
         <form id="phase" class="phaseEntry">
@@ -62,34 +58,85 @@
           <button class="phase-btn" type="submit">Submit</button>
         </form>
       </div>
-      <table id="p" class="phases">
-        <tr>
-          <th>Order</th>
-          <th>Done %</th>
-          <th>Due by</th>
-          <th>Phase</th>
-          <th>Notes</th>
-        </tr>
-        <!-- <tr id="phaseActivity">
-                <td id="order">1.</td>
-                <td id="percentagePhaseDone">100 %</td>
-                <td id="phaseDate">13 Sat</td>
-                <td id="activity">Shopping</td>
-                <td id="notes">
-                    <div class="btns">
-                        <button id="submitDone">Done</button>
-                        <button id="submitUnable">Unable</button>
-                        <button id="addNote">Add a note</button>
-                    </div>
-                    <div class="note" style="display: none;">
-                        <input type="text" name="notes" id="33" placeholder="please break it down" id="notesActivityPhase">
-                        <ul>
-                            <li id="notes">Get the meat <input type="checkbox" name="item1" id="notesChecker"></li>
-                        </ul>
-                    </div>
-                </td>
-            </tr> -->
-      </table>
+      <div class="phases">
+        <table id="p" class="phases__table">
+          <tr class="phases__table--trHead">
+            <th class="phases__table--ho">Order</th>
+            <th class="phases__table--hp">Done %</th>
+            <th class="phases__table--hd">Due by</th>
+            <th class="phases__table--ha">Phase</th>
+            <th class="phases__table--hn">Notes</th>
+          </tr>
+          <tr class="phases__table--tr" id="phaseActivity">
+            <td class="phases__table--td" id="order">1.</td>
+            <td class="phases__table--td" id="percentagePhaseDone">
+              <span id="percentagePhaseDone__p">100 %</span>
+              <span id="percentagePhaseDone__c"></span>
+            </td>
+            <td class="phases__table--td" id="phaseDate">6-12-2024</td>
+            <td class="phases__table--td" id="activity">Shopping</td>
+            <td class="phases__table--td" id="notes">
+              <span class="note__btns">
+                <p id="submitDone">Done</p>
+                <p id="submitUnable">Unable</p>
+                <p id="addNote">Add a note</p>
+              </span>
+              <div class="note__content">
+                <div class="note">
+                  <input
+                    class="note__input"
+                    type="text"
+                    name="notes"
+                    id="33"
+                    placeholder="please break it down"
+                    id="notesActivityPhase"
+                  />
+                  <ol class="note__list">
+                    <li class="note__list--item" id="notes">
+                      Get the meat
+                      <input type="checkbox" name="item1" id="notesChecker" />
+                    </li>
+                  </ol>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr class="phases__table--tr" id="phaseActivity">
+            <td class="phases__table--td" id="order">1.</td>
+            <td class="phases__table--td" id="percentagePhaseDone">
+              <span id="percentagePhaseDone__p">100 %</span>
+              <span id="percentagePhaseDone__c"></span>
+            </td>
+            <td class="phases__table--td" id="phaseDate">6-12-2024</td>
+            <td class="phases__table--td" id="activity">Shopping</td>
+            <td class="phases__table--td" id="notes">
+              <span class="note__btns">
+                <p id="submitDone">Done</p>
+                <p id="submitUnable">Unable</p>
+                <p id="addNote">Add a note</p>
+              </span>
+              <div class="note__content">
+                <div class="note">
+                  <input
+                    class="note__input"
+                    type="text"
+                    name="notes"
+                    id="33"
+                    placeholder="please break it down"
+                    id="notesActivityPhase"
+                  />
+                  <ol class="note__list">
+                    <li class="note__list--item" id="notes">
+                      Get the meat
+                      <input type="checkbox" name="item1" id="notesChecker" />
+                    </li>
+                  </ol>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
     </main>
   </body>
 </html>
