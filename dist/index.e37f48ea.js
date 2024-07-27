@@ -620,8 +620,8 @@ class UserView {
             userObj.activity = this._activityUser.value;
             userObj.user = this._user.value;
             userObj.date = this._date.value;
-            // this._popup.style.display = "none";
-            // this._main.style.display = "block";
+            this._popup.style.display = "none";
+            this._main.style.display = "flex";
             handler(userObj);
         });
     }
@@ -730,25 +730,22 @@ parcelHelpers.defineInteropFlag(exports);
 class PhaseView {
     render(data) {
         return `
-            <tr id="phaseActivity">
-                <td id="order">${data.order}</td>
-                <td id="percentagePhaseDone">${data.percentageDone} %</td>
-                <td id="phaseDate">${data.date}</td>
-                <td id="activity">${data.activity}</td>
-                <td id="notes">
-                    <div class="btns">
-                        <button id="submitDone">Done</button>
-                        <button id="submitUnable">Unable</button>
-                        <button id="addNote">Add a note</button>
-                    </div>
-                    <div class="note" style="display: none;">
-                        <input type="text" name="notes" id="33" placeholder="please break it down" id="notesActivityPhase">
-                        <ul>
-                            <li id="notes">Get the meat <input type="checkbox" name="item1" id="notesChecker"></li>
-                        </ul>
-                    </div>
-                </td>
-            </tr>
+        <tr class="phases__table--tr" id="phaseActivity">
+            <td class="phases__table--td" id="order">${data.order}</td>
+            <td class="phases__table--td" id="percentagePhaseDone">
+              <span id="percentagePhaseDone__p">${data.percentageDone} %</span>
+              <span id="percentagePhaseDone__c"></span>
+            </td>
+            <td class="phases__table--td" id="phaseDate">${data.date}</td>
+            <td class="phases__table--td" id="activity">${data.activity}</td>
+            <td class="phases__table--td" id="notes">
+              <span class="note__btns">
+                <p id="submitDone">Done</p>
+                <p id="submitUnable">Unable</p>
+                <p id="addNote">Add a note</p>
+              </span>
+            </td>
+        </tr>
         `;
     }
 }

@@ -1,0 +1,53 @@
+.phases {
+  width: 950px;
+  height: 1000px;
+  overflow-y: scroll;
+
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+
+    font-family: "Mochiy Pop One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 18px;
+
+    &--ho {
+      width: 5%;
+    }
+    &--hp {
+      width: 10%;
+    }
+    &--hd {
+      width: 10%;
+    }
+    &--hn {
+      width: 50%;
+    }
+
+    &--ho,
+    &--hp,
+    &--hd,
+    &--hn,
+    &--ha,
+    &--td {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    &--trHead {
+      background-color: #000;
+      color: #fff;
+    }
+
+    &--tr {
+      height: 45px;
+
+      &:nth-child(odd) {
+        background-color: #717171;
+        color: #fff;
+      }
+    }
+  }
+}

@@ -14,7 +14,7 @@
     <script type="module" defer src="/src/js/controller.js"></script>
   </head>
   <body>
-    <!-- <div class="popup">
+    <div class="popup">
       <h1 class="popup__header">What's on the agenda for today</h1>
       <form id="userInfo" class="popup__userInfo">
         <div class="popup__form">
@@ -33,16 +33,22 @@
         </div>
         <button class="popup__submit" type="submit">Start here</button>
       </form>
-    </div> -->
+    </div>
     <main>
       <div class="activity">
         <div class="activityEntry">
           <h2 class="activityEntry__topic">To-Do List</h2>
-          <h1 id="activityEntry" class="activityEntry__header">Home remodel</h1>
+          <h1 id="activityEntry" class="activityEntry__header">
+            <!-- Home remodel -->
+          </h1>
           <h3 class="activityEntry__user">To be completed by</h3>
-          <h3 class="activityEntry__user--E" id="userEntry">Kevin Wasonga</h3>
+          <h3 class="activityEntry__user--E" id="userEntry">
+            <!-- Kevin Wasonga -->
+          </h3>
           <h3 class="activityEntry__date">Deadline</h3>
-          <h3 class="activityEntry__date--D" id="dateEntry">12 sato</h3>
+          <h3 class="activityEntry__date--D" id="dateEntry">
+            <!-- 12 sato -->
+          </h3>
         </div>
         <form id="phase" class="phaseEntry">
           <input
@@ -67,7 +73,7 @@
             <th class="phases__table--ha">Phase</th>
             <th class="phases__table--hn">Notes</th>
           </tr>
-          <tr class="phases__table--tr" id="phaseActivity">
+          <!-- <tr class="phases__table--tr" id="phaseActivity">
             <td class="phases__table--td" id="order">1.</td>
             <td class="phases__table--td" id="percentagePhaseDone">
               <span id="percentagePhaseDone__p">100 %</span>
@@ -81,8 +87,9 @@
                 <p id="submitUnable">Unable</p>
                 <p id="addNote">Add a note</p>
               </span>
+              <p class="note__close" id="noteCloser">x</p>
               <div class="note__content">
-                <div class="note">
+                <form class="note">
                   <input
                     class="note__input"
                     type="text"
@@ -97,44 +104,11 @@
                       <input type="checkbox" name="item1" id="notesChecker" />
                     </li>
                   </ol>
-                </div>
+                  <button class="note__submit" type="submit">Enter Note</button>
+                </form>
               </div>
             </td>
-          </tr>
-          <tr class="phases__table--tr" id="phaseActivity">
-            <td class="phases__table--td" id="order">1.</td>
-            <td class="phases__table--td" id="percentagePhaseDone">
-              <span id="percentagePhaseDone__p">100 %</span>
-              <span id="percentagePhaseDone__c"></span>
-            </td>
-            <td class="phases__table--td" id="phaseDate">6-12-2024</td>
-            <td class="phases__table--td" id="activity">Shopping</td>
-            <td class="phases__table--td" id="notes">
-              <span class="note__btns">
-                <p id="submitDone">Done</p>
-                <p id="submitUnable">Unable</p>
-                <p id="addNote">Add a note</p>
-              </span>
-              <div class="note__content">
-                <div class="note">
-                  <input
-                    class="note__input"
-                    type="text"
-                    name="notes"
-                    id="33"
-                    placeholder="please break it down"
-                    id="notesActivityPhase"
-                  />
-                  <ol class="note__list">
-                    <li class="note__list--item" id="notes">
-                      Get the meat
-                      <input type="checkbox" name="item1" id="notesChecker" />
-                    </li>
-                  </ol>
-                </div>
-              </div>
-            </td>
-          </tr>
+          </tr> -->
         </table>
       </div>
     </main>
