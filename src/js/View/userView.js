@@ -1,27 +1,29 @@
 class UserView {
-    _activityUser = document.querySelector("#activityUser");
-    _user = document.querySelector("#user");
-    _date = document.querySelector("#date");
-    _userInfo = document.querySelector("#userInfo");
-    _popup = document.querySelector(".popup");
-    _main = document.querySelector("main");
+  _activityUser = document.querySelector("#activityUser");
+  _user = document.querySelector("#user");
+  _date = document.querySelector("#date");
+  _userInfo = document.querySelector(".popup__submit");
+  _popup = document.querySelector(".popup");
+  _main = document.querySelector("main");
 
-    getUserInfo(handler){
-      this._userInfo.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const userObj = {};
+  getUserInfo(handler) {
+    this._userInfo.addEventListener("click", handler);
+  }
 
-        userObj.activity = this._activityUser.value;
-        userObj.user = this._user.value;
-        userObj.date = this._date.value;
+  updateUI() {
+    this._popup.style.display = "none";
+    this._main.style.display = "flex";
+  }
 
-        this._popup.style.display = "none";
-        this._main.style.display = "flex";
+  userInfo() {
+    const userObj = {};
 
-        handler(userObj);
-      })
-    }
+    userObj.activity = this._activityUser.value;
+    userObj.user = this._user.value;
+    userObj.date = this._date.value;
 
+    return userObj;
+  }
 }
 
 

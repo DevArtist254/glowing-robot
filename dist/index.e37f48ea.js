@@ -592,38 +592,50 @@ var _activityView = require("./View/activityView");
 var _activityViewDefault = parcelHelpers.interopDefault(_activityView);
 var _userView = require("./View/userView");
 var _userViewDefault = parcelHelpers.interopDefault(_userView);
-const userActivity = function(userObj = null) {
-    _model.setUserModel(userObj);
-    (0, _introViewDefault.default).updateUI(_model.state.user);
+var _notesView = require("./View/notesView");
+var _notesViewDefault = parcelHelpers.interopDefault(_notesView);
+const userActivity = function() {
+    _model.setUserModel((0, _userViewDefault.default).userInfo());
+    (0, _userViewDefault.default).updateUI();
+    (0, _introViewDefault.default).updateUI(_model.state.users);
 };
-const phaseEntry = function(phase) {
-    _model.setActivityPhase(phase);
-    (0, _activityViewDefault.default).generatePhaseMarkup(phase);
+const phaseEntry = function() {
+    _model.setActivityPhase((0, _activityViewDefault.default).getPhase());
+    (0, _activityViewDefault.default).generatePhaseMarkup(_model.state.phases);
 };
-(0, _userViewDefault.default).getUserInfo(userActivity);
-(0, _activityViewDefault.default).submitNewPhase(phaseEntry);
+const notesEntry = function() {
+    console.log("1");
+};
+const init = function() {
+    (0, _userViewDefault.default).getUserInfo(userActivity);
+    (0, _activityViewDefault.default).submitNewPhase(phaseEntry);
+    (0, _notesViewDefault.default).addNotes(notesEntry);
+};
+init();
 
-},{"./View/userView":"i1cKk","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./model":"Y4A21","./View/introView":"2IOc6","./View/activityView":"68aQa"}],"i1cKk":[function(require,module,exports) {
+},{"./View/userView":"i1cKk","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./model":"Y4A21","./View/introView":"2IOc6","./View/activityView":"68aQa","./View/notesView":"cfLv5"}],"i1cKk":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 class UserView {
     _activityUser = document.querySelector("#activityUser");
     _user = document.querySelector("#user");
     _date = document.querySelector("#date");
-    _userInfo = document.querySelector("#userInfo");
+    _userInfo = document.querySelector(".popup__submit");
     _popup = document.querySelector(".popup");
     _main = document.querySelector("main");
     getUserInfo(handler) {
-        this._userInfo.addEventListener("submit", (e)=>{
-            e.preventDefault();
-            const userObj = {};
-            userObj.activity = this._activityUser.value;
-            userObj.user = this._user.value;
-            userObj.date = this._date.value;
-            this._popup.style.display = "none";
-            this._main.style.display = "flex";
-            handler(userObj);
-        });
+        this._userInfo.addEventListener("click", handler);
+    }
+    updateUI() {
+        this._popup.style.display = "none";
+        this._main.style.display = "flex";
+    }
+    userInfo() {
+        const userObj = {};
+        userObj.activity = this._activityUser.value;
+        userObj.user = this._user.value;
+        userObj.date = this._date.value;
+        return userObj;
     }
 }
 exports.default = new UserView();
@@ -664,21 +676,340 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "state", ()=>state);
 parcelHelpers.export(exports, "setUserModel", ()=>setUserModel);
 parcelHelpers.export(exports, "setActivityPhase", ()=>setActivityPhase);
+parcelHelpers.export(exports, "createNotes", ()=>createNotes);
+var _uuid = require("uuid");
 const state = {
-    user: {},
-    phases: []
+    users: {
+        user: "",
+        date: "",
+        activity: ""
+    },
+    phases: [],
+    notes: [],
+    note: {
+        note: "",
+        noteId: "",
+        done: 0
+    }
 };
 const setUserModel = function(newUser) {
     const { user, date, activity } = newUser;
-    state.user = {
+    state.users = {
         user,
         date,
         activity
     };
 };
-const setActivityPhase = function(phase) {
+const setActivityPhase = function(newPhase) {
+    const { date, activity, order } = newPhase;
+    const phase = {
+        phaseId: (0, _uuid.v1)(),
+        date,
+        percentageDone: 0,
+        order,
+        activity
+    };
     state.phases.push(phase);
 };
+const createNotes = function(note, done, id) {
+    const newNote = {
+        note,
+        done
+    };
+    state.users.phases.find((el)=>el.phaseId === id).notes.push(newNote);
+}; // const state2 = {
+ //   userId: "62731945",
+ //   user: "Kevin Wasonga",
+ //   date: "2024-07-22",
+ //   activity: "Home remodel",
+ //   phases: [
+ //     {
+ //       phaseId: "62731945",
+ //       dateDealine: "2024-07-18",
+ //       percentageDone: 100,
+ //       order: 1,
+ //       notes: [
+ //         {
+ //           note: "Milk cow",
+ //           done: 1,
+ //         },
+ //         {
+ //           note: "Watch tv",
+ //           done: 0,
+ //         },
+ //         {
+ //           note: "Build a chair",
+ //           done: 1,
+ //         },
+ //       ],
+ //     },
+ //     {
+ //       phaseId: "62731946",
+ //       dateDealine: "2024-07-18",
+ //       percentageDone: 100,
+ //       order: 1,
+ //       notes: [
+ //         {
+ //           note: "Milk cow",
+ //           done: 1,
+ //         },
+ //         {
+ //           note: "Watch tv",
+ //           done: 0,
+ //         },
+ //         {
+ //           note: "Build a chair",
+ //           done: 1,
+ //         },
+ //       ],
+ //     },
+ //   ],
+ // };
+ // createNotes("love island", 0, "62731946");
+ // createNotes("Read a book", 0, "62731946");
+ // console.log(state2);
+ // function stateSetter() {
+ //   user = {
+ //     userId: "62731945",
+ //     user: "Kevin Wasonga",
+ //     date: "2024-07-22",
+ //     activity: "Home remodel",
+ //     phases: [
+ //       {
+ //         userId: "62731945",
+ //         dateDealine: "2024-07-18",
+ //         percentageDone: 100,
+ //         order: 1,
+ //         notes: [
+ //           {
+ //             note: "Milk cow",
+ //             done: 1,
+ //           },
+ //           {
+ //             note: "Watch tv",
+ //             done: 0,
+ //           },
+ //           {
+ //             note: "Build a chair",
+ //             done: 1,
+ //           },
+ //         ],
+ //       },
+ //     ],
+ //   };
+ // }
+ // stateSetter();
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","uuid":"j4KJi"}],"j4KJi":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "MAX", ()=>(0, _maxJsDefault.default));
+parcelHelpers.export(exports, "NIL", ()=>(0, _nilJsDefault.default));
+parcelHelpers.export(exports, "parse", ()=>(0, _parseJsDefault.default));
+parcelHelpers.export(exports, "stringify", ()=>(0, _stringifyJsDefault.default));
+parcelHelpers.export(exports, "v1", ()=>(0, _v1JsDefault.default));
+parcelHelpers.export(exports, "v1ToV6", ()=>(0, _v1ToV6JsDefault.default));
+parcelHelpers.export(exports, "v3", ()=>(0, _v3JsDefault.default));
+parcelHelpers.export(exports, "v4", ()=>(0, _v4JsDefault.default));
+parcelHelpers.export(exports, "v5", ()=>(0, _v5JsDefault.default));
+parcelHelpers.export(exports, "v6", ()=>(0, _v6JsDefault.default));
+parcelHelpers.export(exports, "v6ToV1", ()=>(0, _v6ToV1JsDefault.default));
+parcelHelpers.export(exports, "v7", ()=>(0, _v7JsDefault.default));
+parcelHelpers.export(exports, "validate", ()=>(0, _validateJsDefault.default));
+parcelHelpers.export(exports, "version", ()=>(0, _versionJsDefault.default));
+var _maxJs = require("./max.js");
+var _maxJsDefault = parcelHelpers.interopDefault(_maxJs);
+var _nilJs = require("./nil.js");
+var _nilJsDefault = parcelHelpers.interopDefault(_nilJs);
+var _parseJs = require("./parse.js");
+var _parseJsDefault = parcelHelpers.interopDefault(_parseJs);
+var _stringifyJs = require("./stringify.js");
+var _stringifyJsDefault = parcelHelpers.interopDefault(_stringifyJs);
+var _v1Js = require("./v1.js");
+var _v1JsDefault = parcelHelpers.interopDefault(_v1Js);
+var _v1ToV6Js = require("./v1ToV6.js");
+var _v1ToV6JsDefault = parcelHelpers.interopDefault(_v1ToV6Js);
+var _v3Js = require("./v3.js");
+var _v3JsDefault = parcelHelpers.interopDefault(_v3Js);
+var _v4Js = require("./v4.js");
+var _v4JsDefault = parcelHelpers.interopDefault(_v4Js);
+var _v5Js = require("./v5.js");
+var _v5JsDefault = parcelHelpers.interopDefault(_v5Js);
+var _v6Js = require("./v6.js");
+var _v6JsDefault = parcelHelpers.interopDefault(_v6Js);
+var _v6ToV1Js = require("./v6ToV1.js");
+var _v6ToV1JsDefault = parcelHelpers.interopDefault(_v6ToV1Js);
+var _v7Js = require("./v7.js");
+var _v7JsDefault = parcelHelpers.interopDefault(_v7Js);
+var _validateJs = require("./validate.js");
+var _validateJsDefault = parcelHelpers.interopDefault(_validateJs);
+var _versionJs = require("./version.js");
+var _versionJsDefault = parcelHelpers.interopDefault(_versionJs);
+
+},{"./max.js":false,"./nil.js":false,"./parse.js":false,"./stringify.js":false,"./v1.js":"9qfh9","./v1ToV6.js":false,"./v3.js":false,"./v4.js":false,"./v5.js":false,"./v6.js":false,"./v6ToV1.js":false,"./v7.js":false,"./validate.js":false,"./version.js":false,"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5Y9F1":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "unsafeStringify", ()=>unsafeStringify);
+var _validateJs = require("./validate.js");
+var _validateJsDefault = parcelHelpers.interopDefault(_validateJs);
+/**
+ * Convert array of 16 byte values to UUID string format of the form:
+ * XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+ */ var byteToHex = [];
+for(var i = 0; i < 256; ++i)byteToHex.push((i + 0x100).toString(16).slice(1));
+function unsafeStringify(arr, offset = 0) {
+    // Note: Be careful editing this code!  It's been tuned for performance
+    // and works in ways you may not expect. See https://github.com/uuidjs/uuid/pull/434
+    //
+    // Note to future-self: No, you can't remove the `toLowerCase()` call.
+    // REF: https://github.com/uuidjs/uuid/pull/677#issuecomment-1757351351
+    return (byteToHex[arr[offset + 0]] + byteToHex[arr[offset + 1]] + byteToHex[arr[offset + 2]] + byteToHex[arr[offset + 3]] + "-" + byteToHex[arr[offset + 4]] + byteToHex[arr[offset + 5]] + "-" + byteToHex[arr[offset + 6]] + byteToHex[arr[offset + 7]] + "-" + byteToHex[arr[offset + 8]] + byteToHex[arr[offset + 9]] + "-" + byteToHex[arr[offset + 10]] + byteToHex[arr[offset + 11]] + byteToHex[arr[offset + 12]] + byteToHex[arr[offset + 13]] + byteToHex[arr[offset + 14]] + byteToHex[arr[offset + 15]]).toLowerCase();
+}
+function stringify(arr, offset = 0) {
+    var uuid = unsafeStringify(arr, offset);
+    // Consistency check for valid UUID.  If this throws, it's likely due to one
+    // of the following:
+    // - One or more input array values don't map to a hex octet (leading to
+    // "undefined" in the uuid)
+    // - Invalid input values for the RFC `version` or `variant` fields
+    if (!(0, _validateJsDefault.default)(uuid)) throw TypeError("Stringified UUID is invalid");
+    return uuid;
+}
+exports.default = stringify;
+
+},{"./validate.js":"eHPgI","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"eHPgI":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _regexJs = require("./regex.js");
+var _regexJsDefault = parcelHelpers.interopDefault(_regexJs);
+function validate(uuid) {
+    return typeof uuid === "string" && (0, _regexJsDefault.default).test(uuid);
+}
+exports.default = validate;
+
+},{"./regex.js":"bUa5g","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bUa5g":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+exports.default = /^(?:[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$/i;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9qfh9":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _rngJs = require("./rng.js");
+var _rngJsDefault = parcelHelpers.interopDefault(_rngJs);
+var _stringifyJs = require("./stringify.js");
+// **`v1()` - Generate time-based UUID**
+//
+// Inspired by https://github.com/LiosK/UUID.js
+// and http://docs.python.org/library/uuid.html
+var _nodeId;
+var _clockseq;
+// Previous uuid creation time
+var _lastMSecs = 0;
+var _lastNSecs = 0;
+// See https://github.com/uuidjs/uuid for API details
+function v1(options, buf, offset) {
+    var i = buf && offset || 0;
+    var b = buf || new Array(16);
+    options = options || {};
+    var node = options.node;
+    var clockseq = options.clockseq;
+    // v1 only: Use cached `node` and `clockseq` values
+    if (!options._v6) {
+        if (!node) node = _nodeId;
+        if (clockseq == null) clockseq = _clockseq;
+    }
+    // Handle cases where we need entropy.  We do this lazily to minimize issues
+    // related to insufficient system entropy.  See #189
+    if (node == null || clockseq == null) {
+        var seedBytes = options.random || (options.rng || (0, _rngJsDefault.default))();
+        // Randomize node
+        if (node == null) {
+            node = [
+                seedBytes[0],
+                seedBytes[1],
+                seedBytes[2],
+                seedBytes[3],
+                seedBytes[4],
+                seedBytes[5]
+            ];
+            // v1 only: cache node value for reuse
+            if (!_nodeId && !options._v6) {
+                // per RFC4122 4.5: Set MAC multicast bit (v1 only)
+                node[0] |= 0x01; // Set multicast bit
+                _nodeId = node;
+            }
+        }
+        // Randomize clockseq
+        if (clockseq == null) {
+            // Per 4.2.2, randomize (14 bit) clockseq
+            clockseq = (seedBytes[6] << 8 | seedBytes[7]) & 0x3fff;
+            if (_clockseq === undefined && !options._v6) _clockseq = clockseq;
+        }
+    }
+    // v1 & v6 timestamps are 100 nano-second units since the Gregorian epoch,
+    // (1582-10-15 00:00).  JSNumbers aren't precise enough for this, so time is
+    // handled internally as 'msecs' (integer milliseconds) and 'nsecs'
+    // (100-nanoseconds offset from msecs) since unix epoch, 1970-01-01 00:00.
+    var msecs = options.msecs !== undefined ? options.msecs : Date.now();
+    // Per 4.2.1.2, use count of uuid's generated during the current clock
+    // cycle to simulate higher resolution clock
+    var nsecs = options.nsecs !== undefined ? options.nsecs : _lastNSecs + 1;
+    // Time since last uuid creation (in msecs)
+    var dt = msecs - _lastMSecs + (nsecs - _lastNSecs) / 10000;
+    // Per 4.2.1.2, Bump clockseq on clock regression
+    if (dt < 0 && options.clockseq === undefined) clockseq = clockseq + 1 & 0x3fff;
+    // Reset nsecs if clock regresses (new clockseq) or we've moved onto a new
+    // time interval
+    if ((dt < 0 || msecs > _lastMSecs) && options.nsecs === undefined) nsecs = 0;
+    // Per 4.2.1.2 Throw error if too many uuids are requested
+    if (nsecs >= 10000) throw new Error("uuid.v1(): Can't create more than 10M uuids/sec");
+    _lastMSecs = msecs;
+    _lastNSecs = nsecs;
+    _clockseq = clockseq;
+    // Per 4.1.4 - Convert from unix epoch to Gregorian epoch
+    msecs += 12219292800000;
+    // `time_low`
+    var tl = ((msecs & 0xfffffff) * 10000 + nsecs) % 0x100000000;
+    b[i++] = tl >>> 24 & 0xff;
+    b[i++] = tl >>> 16 & 0xff;
+    b[i++] = tl >>> 8 & 0xff;
+    b[i++] = tl & 0xff;
+    // `time_mid`
+    var tmh = msecs / 0x100000000 * 10000 & 0xfffffff;
+    b[i++] = tmh >>> 8 & 0xff;
+    b[i++] = tmh & 0xff;
+    // `time_high_and_version`
+    b[i++] = tmh >>> 24 & 0xf | 0x10; // include version
+    b[i++] = tmh >>> 16 & 0xff;
+    // `clock_seq_hi_and_reserved` (Per 4.2.2 - include variant)
+    b[i++] = clockseq >>> 8 | 0x80;
+    // `clock_seq_low`
+    b[i++] = clockseq & 0xff;
+    // `node`
+    for(var n = 0; n < 6; ++n)b[i + n] = node[n];
+    return buf || (0, _stringifyJs.unsafeStringify)(b);
+}
+exports.default = v1;
+
+},{"./rng.js":"2psyE","./stringify.js":"5Y9F1","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2psyE":[function(require,module,exports) {
+// Unique ID creation requires a high quality random # generator. In the browser we therefore
+// require the crypto API and do not support built-in fallback to lower quality random number
+// generators (like Math.random()).
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>rng);
+var getRandomValues;
+var rnds8 = new Uint8Array(16);
+function rng() {
+    // lazy load so that environments that need to polyfill have a chance to do so
+    if (!getRandomValues) {
+        // getRandomValues needs to be invoked in a context where "this" is a Crypto implementation.
+        getRandomValues = typeof crypto !== "undefined" && crypto.getRandomValues && crypto.getRandomValues.bind(crypto);
+        if (!getRandomValues) throw new Error("crypto.getRandomValues() not supported. See https://github.com/uuidjs/uuid#getrandomvalues-not-supported");
+    }
+    return getRandomValues(rnds8);
+}
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2IOc6":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -702,23 +1033,22 @@ var _phaseView = require("./phaseView");
 var _phaseViewDefault = parcelHelpers.interopDefault(_phaseView);
 class ActivityView {
     _parent = document.querySelector("#p");
-    _phase = document.querySelector("#phase");
+    _phase = document.querySelector(".phase-btn");
     _phaseActivity = document.querySelector("#activityPhase");
     _deadline = document.querySelector("#deadlineActivityDate");
     _count = 1;
     submitNewPhase(handler) {
-        this._phase.addEventListener("submit", (e)=>{
-            e.preventDefault();
-            const phase = {};
-            phase.date = this._deadline.value;
-            phase.activity = this._phaseActivity.value;
-            phase.order = this._count++;
-            phase.percentageDone = 0;
-            handler(phase);
-        });
+        this._phase.addEventListener("click", handler);
+    }
+    getPhase() {
+        const phase = {};
+        phase.date = this._deadline.value;
+        phase.activity = this._phaseActivity.value;
+        phase.order = this._count++;
+        return phase;
     }
     generatePhaseMarkup(data) {
-        const markup = (0, _phaseViewDefault.default).render(data);
+        const markup = data.map((el)=>(0, _phaseViewDefault.default).render(el)).join("");
         this._parent.insertAdjacentHTML("beforeend", markup);
     }
 }
@@ -750,6 +1080,21 @@ class PhaseView {
     }
 }
 exports.default = new PhaseView();
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cfLv5":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+class NotesView {
+    _addNotes = document.querySelector("#addNote");
+    addNotes(handler) {
+        if (this._addNotes !== null) this._addNotes.addEventListener("click", ()=>{
+            console.log("Hello worldd");
+            handler();
+        });
+        else console.log("Nothing happened");
+    }
+}
+exports.default = new NotesView();
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["hycaY","aenu9"], "aenu9", "parcelRequire4f33")
 

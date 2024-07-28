@@ -13,7 +13,7 @@
   <body>
     <div class="popup">
       <h1 class="popup__header">What's on the agenda for today</h1>
-      <form id="userInfo" class="popup__userInfo">
+      <div id="userInfo" class="popup__userInfo">
         <div class="popup__form">
           <label class="popup__label" for="text">Enter your the activity or project here</label>
           <input class="popup__input" id="activityUser" type="text">
@@ -26,8 +26,8 @@
           <label class="popup__label" for="date">Enter the deadline</label>
           <input class="popup__input" id="date" type="date">
         </div>
-        <button class="popup__submit" type="submit">Start here</button>
-      </form>
+        <button class="popup__submit">Start here</button>
+      </div>
     </div>
     <main>
       <div class="activity">
@@ -45,11 +45,11 @@
             <!-- 12 sato -->
           </h3>
         </div>
-        <form id="phase" class="phaseEntry">
+        <div id="phase" class="phaseEntry">
           <input id="activityPhase" type="text" placeholder="Enter your the activity or project here">
           <input id="deadlineActivityDate" type="date" placeholder="Enter the deadline">
-          <button class="phase-btn" type="submit">Submit</button>
-        </form>
+          <button class="phase-btn">Submit</button>
+        </div>
       </div>
       <div class="phases">
         <table id="p" class="phases__table">

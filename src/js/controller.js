@@ -2,19 +2,31 @@ import * as model from "./model";
 import introView from "./View/introView";
 import activityView from "./View/activityView";
 import userView from "./View/userView";
+import notesView from "./View/notesView";
 
-const userActivity = function (userObj = null) {
-  model.setUserModel(userObj);
+const userActivity = function () {
 
-  introView.updateUI(model.state.user);
+  model.setUserModel(userView.userInfo());
+
+  userView.updateUI();
+
+  introView.updateUI(model.state.users);
 };
 
-const phaseEntry = function (phase) {
+const phaseEntry = function () {
+  model.setActivityPhase(activityView.getPhase());
 
-  model.setActivityPhase(phase);
-
-  activityView.generatePhaseMarkup(phase);
+  activityView.generatePhaseMarkup(model.state.phases);
 };
 
-userView.getUserInfo(userActivity);
-activityView.submitNewPhase(phaseEntry);
+const notesEntry = function () {
+  console.log("1");
+};
+
+const init = function () {
+ userView.getUserInfo(userActivity);
+ activityView.submitNewPhase(phaseEntry);
+ notesView.addNotes(notesEntry); 
+}
+
+init();

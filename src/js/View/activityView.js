@@ -2,27 +2,27 @@ import phaseView from "./phaseView";
 
 class ActivityView {
   _parent = document.querySelector("#p");
-  _phase = document.querySelector("#phase");
+  _phase = document.querySelector(".phase-btn");
   _phaseActivity = document.querySelector("#activityPhase");
   _deadline = document.querySelector("#deadlineActivityDate");
   _count = 1;
 
   submitNewPhase(handler) {
-    this._phase.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const phase = {};
+    this._phase.addEventListener("click", handler);
+  }
 
-      phase.date = this._deadline.value;
-      phase.activity = this._phaseActivity.value;
-      phase.order = this._count++;
-      phase.percentageDone = 0;
+  getPhase() {
+    const phase = {};
 
-      handler(phase);
-    });
+    phase.date = this._deadline.value;
+    phase.activity = this._phaseActivity.value;
+    phase.order = this._count++;
+
+    return phase;
   }
 
   generatePhaseMarkup(data) {
-    const markup = phaseView.render(data);
+    const markup = data.map(el => phaseView.render(el)).join(""); 
 
     this._parent.insertAdjacentHTML("beforeend", markup);
   }
