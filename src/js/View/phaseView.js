@@ -1,7 +1,7 @@
 class PhaseView {
   render(data) {
     return `
-        <tr class="phases__table--tr" id="phaseActivity">
+        <tr class="phases__table--tr" id="${data.phaseId}">
             <td class="phases__table--td" id="order">${data.order}</td>
             <td class="phases__table--td" id="percentagePhaseDone">
               <span id="percentagePhaseDone__p">${data.percentageDone} %</span>

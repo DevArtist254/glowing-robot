@@ -1,18 +1,8 @@
 class NotesView {
-  _addNotes = document.querySelector("#addNote");
-
+  _tbody = document.querySelector("#tbody");
 
   addNotes(handler) {
-    if (this._addNotes !== null) {
-      this._addNotes.addEventListener("click", () => {
-        console.log("Hello worldd");
-
-        handler();
-      });
-    }else {
-      console.log("Nothing happened");
-    }
-    
+      this._addNotes.addEventListener("click", handler);
   }
 }
 

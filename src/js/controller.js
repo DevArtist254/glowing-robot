@@ -17,6 +17,8 @@ const phaseEntry = function () {
   model.setActivityPhase(activityView.getPhase());
 
   activityView.generatePhaseMarkup(model.state.phases);
+
+  console.log(model.state.phases);
 };
 
 const notesEntry = function () {

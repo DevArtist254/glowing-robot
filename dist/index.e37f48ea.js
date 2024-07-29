@@ -602,6 +602,7 @@ const userActivity = function() {
 const phaseEntry = function() {
     _model.setActivityPhase((0, _activityViewDefault.default).getPhase());
     (0, _activityViewDefault.default).generatePhaseMarkup(_model.state.phases);
+    console.log(_model.state.phases);
 };
 const notesEntry = function() {
     console.log("1");
@@ -1032,7 +1033,7 @@ parcelHelpers.defineInteropFlag(exports);
 var _phaseView = require("./phaseView");
 var _phaseViewDefault = parcelHelpers.interopDefault(_phaseView);
 class ActivityView {
-    _parent = document.querySelector("#p");
+    _parent = document.querySelector("#tbody");
     _phase = document.querySelector(".phase-btn");
     _phaseActivity = document.querySelector("#activityPhase");
     _deadline = document.querySelector("#deadlineActivityDate");
@@ -1048,6 +1049,7 @@ class ActivityView {
         return phase;
     }
     generatePhaseMarkup(data) {
+        this._parent.innerHTML = "";
         const markup = data.map((el)=>(0, _phaseViewDefault.default).render(el)).join("");
         this._parent.insertAdjacentHTML("beforeend", markup);
     }
@@ -1060,7 +1062,7 @@ parcelHelpers.defineInteropFlag(exports);
 class PhaseView {
     render(data) {
         return `
-        <tr class="phases__table--tr" id="phaseActivity">
+        <tr class="phases__table--tr" id="${data.phaseId}">
             <td class="phases__table--td" id="order">${data.order}</td>
             <td class="phases__table--td" id="percentagePhaseDone">
               <span id="percentagePhaseDone__p">${data.percentageDone} %</span>

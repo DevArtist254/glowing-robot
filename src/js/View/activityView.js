@@ -1,7 +1,7 @@
 import phaseView from "./phaseView";
 
 class ActivityView {
-  _parent = document.querySelector("#p");
+  _parent = document.querySelector("#tbody");
   _phase = document.querySelector(".phase-btn");
   _phaseActivity = document.querySelector("#activityPhase");
   _deadline = document.querySelector("#deadlineActivityDate");
@@ -22,7 +22,9 @@ class ActivityView {
   }
 
   generatePhaseMarkup(data) {
-    const markup = data.map(el => phaseView.render(el)).join(""); 
+    this._parent.innerHTML = "";
+
+    const markup = data.map((el) => phaseView.render(el)).join("");
 
     this._parent.insertAdjacentHTML("beforeend", markup);
   }
