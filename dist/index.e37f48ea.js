@@ -1115,6 +1115,7 @@ class NotesView {
         noteCloser.style.display = "inline";
         noteContent.style.display = "block";
     }
+    enterNotes() {}
 }
 exports.default = new NotesView();
 
