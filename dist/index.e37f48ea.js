@@ -602,10 +602,13 @@ const userActivity = function() {
 const phaseEntry = function() {
     _model.setActivityPhase((0, _activityViewDefault.default).getPhase());
     (0, _activityViewDefault.default).generatePhaseMarkup(_model.state.phases);
-    console.log(_model.state.phases);
 };
-const notesEntry = function() {
-    console.log("1");
+const notesEntry = function(e) {
+    //Get id of the clicked child el
+    const id = e.srcElement.offsetParent.parentElement.attributes[1].value;
+    //Display note 
+    (0, _notesViewDefault.default).displayNote(e);
+//notesView.enterNotes();
 };
 const init = function() {
     (0, _userViewDefault.default).getUserInfo(userActivity);
@@ -1076,6 +1079,19 @@ class PhaseView {
                 <p id="submitUnable">Unable</p>
                 <p id="addNote">Add a note</p>
               </span>
+              <p class="note__close" id="noteCloser">x</p>     
+              <div class="note__content">
+                  <form class="note">
+                    <input
+                      class="note__input"
+                      type="text"
+                      name="notes"
+                      placeholder="please break it down"
+                      id="notesActivityPhase"
+                    />
+                    <button class="note__submit" type="submit">Enter Note</button>
+                  </form>
+              </div>
             </td>
         </tr>
         `;
@@ -1089,7 +1105,15 @@ parcelHelpers.defineInteropFlag(exports);
 class NotesView {
     _tbody = document.querySelector("#tbody");
     addNotes(handler) {
-        this._addNotes.addEventListener("click", handler);
+        this._tbody.addEventListener("click", (e)=>{
+            handler(e);
+        });
+    }
+    displayNote(e) {
+        const noteCloser = e.srcElement.offsetParent.children[1];
+        const noteContent = e.srcElement.offsetParent.children[2];
+        noteCloser.style.display = "inline";
+        noteContent.style.display = "block";
     }
 }
 exports.default = new NotesView();

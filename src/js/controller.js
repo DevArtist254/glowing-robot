@@ -18,11 +18,16 @@ const phaseEntry = function () {
 
   activityView.generatePhaseMarkup(model.state.phases);
 
-  console.log(model.state.phases);
 };
 
-const notesEntry = function () {
-  console.log("1");
+const notesEntry = function (e) {
+  //Get id of the clicked child el
+    const id = e.srcElement.offsetParent.parentElement.attributes[1].value;
+
+  //Display note 
+  notesView.displayNote(e);
+
+  //notesView.enterNotes();
 };
 
 const init = function () {

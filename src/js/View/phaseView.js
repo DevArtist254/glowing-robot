@@ -15,6 +15,19 @@ class PhaseView {
                 <p id="submitUnable">Unable</p>
                 <p id="addNote">Add a note</p>
               </span>
+              <p class="note__close" id="noteCloser">x</p>     
+              <div class="note__content">
+                  <form class="note">
+                    <input
+                      class="note__input"
+                      type="text"
+                      name="notes"
+                      placeholder="please break it down"
+                      id="notesActivityPhase"
+                    />
+                    <button class="note__submit" type="submit">Enter Note</button>
+                  </form>
+              </div>
             </td>
         </tr>
         `;
